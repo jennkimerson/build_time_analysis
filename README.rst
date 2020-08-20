@@ -49,3 +49,16 @@ The "ceph" package entry in Brew has a package ID number of ``34590``. To query 
 record for the Ceph package::
 
     SELECT * FROM brew.build WHERE brew.build.pkg_id=34590;
+
+Running tests
+=============
+
+Install pytest in the virtualenv::
+
+    pip install pytest
+
+Run the tests::
+
+    py.test
+
+This should auto-discover any tests under the ``tests`` directory.

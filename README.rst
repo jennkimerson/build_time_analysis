@@ -48,8 +48,12 @@ The output will look like this::
 PostgreSQL queries for Brew
 ===========================
 
-To connect to Teeid on the command-line, ensure you have a Kerberos ticket,
-and then run the ``psql`` command::
+To connect to Teeid on the command-line, you'll need the ``psql`` command.
+Install it with yum::
+
+    sudo yum -y install postgresql
+
+Ensure you have a Kerberos ticket, and then run the ``psql`` command::
 
   psql -h virtualdb.engineering.redhat.com --port 5433 public
 

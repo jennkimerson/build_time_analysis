@@ -7,6 +7,14 @@ Create a Python virtualenv, activate it, and then run::
 
     pip install -r requirements.txt
 
+On Fedora/RHEL, you can run without a virtualenv and use system-site packages
+instead::
+
+    sudo yum -y install \
+      'python3dist(psycopg2)' \
+      'python3dist(numpy)' \
+      'python3dist(matplotlib)' \
+      'python3dist(pandas)'
 
 Kerberos and PostgreSQL
 =======================

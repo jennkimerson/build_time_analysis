@@ -20,7 +20,7 @@ on virtualdb.engineering.redhat.com.
 To install ``kinit`` and ``klist`` on Fedora or RHEL, install the
 ``krb5-workstation`` package::
 
-   yum -y install krb5-workstation
+   sudo yum -y install krb5-workstation
 
 To get a Kerberos ticket, run the ``kinit`` command like so::
 

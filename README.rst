@@ -15,8 +15,14 @@ The Brew database is accessible through Teiid, a read-only virtual postgresql
 interface to the main Brew PostgreSQL server.
 
 You must have a Kerberos ticket to authenticate to the Teeid service running
-on virtualdb.engineering.redhat.com. To get a ticket, run the ``kinit``
-command like so::
+on virtualdb.engineering.redhat.com.
+
+To install ``kinit`` and ``klist`` on Fedora or RHEL, install the
+``krb5-workstation`` package::
+
+   yum -y install krb5-workstation
+
+To get a Kerberos ticket, run the ``kinit`` command like so::
 
     kinit jenkim@IPA.REDHAT.COM
 

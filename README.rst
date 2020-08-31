@@ -23,7 +23,10 @@ To install ``kinit`` and ``klist`` on Fedora or RHEL, install the
    sudo yum -y install krb5-workstation
 
 To make Kerberos easier to use on your system, you can set
-``default_realm = IPA.REDHAT.COM`` in ``/etc/krb5.conf``.
+``default_realm = IPA.REDHAT.COM`` in ``/etc/krb5.conf``. Open it with an
+editor in sudo mode::
+
+   sudo vim /etc/krb5.conf
 
 To get a Kerberos ticket, run the ``kinit`` command like so::
 

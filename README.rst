@@ -15,7 +15,7 @@ instead::
       'python3dist(numpy)' \
       'python3dist(matplotlib)' \
       'python3dist(pandas)'
-
+      
 Kerberos and PostgreSQL
 =======================
 
@@ -73,6 +73,28 @@ The "ceph" package entry in Brew has a package ID number of ``34590``. To query 
 record for the Ceph package::
 
     SELECT * FROM brew.build WHERE brew.build.pkg_id=34590;
+
+Running
+======
+
+Before running this program, you must set the PGHOST environment::
+
+    export PGHOST=virtualdb.engineering.redhat.com
+    
+There are 3 python scripts you can run to analyze the Ceph builds.
+
+- To output all builds, containing the following information: id, package_id, version, release, start_time, completion_time, and build_duration::
+
+    python3 view_stats.py
+
+- To show the analysis of build time per each build_id in a form of scatter plot::
+
+    python3 build_time_build_id.py
+
+- Show the analysis of build time per build_version in a form of box plot::
+
+    python3 build_time_ver.py
+
 
 Running tests
 =============

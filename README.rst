@@ -1,11 +1,35 @@
 This tool analyzes ceph package build times in Brew.
 
-Installing
-==========
+Installing on Linux
+===================
+
+On RHEL/Fedora, when using a virtualenv, you must install the following
+packages::
+
+    sudo yum -y install python3-virtualenv libpq-devel krb5-devel
+
+Create a Python virtualenv and activate it::
+
+    virtualenv venv
+    . venv/bin/activate
+
+Then install the dependencies into the virtualenv::
+
+    pip install -r requirements.txt
+
+
+Installing on macos
+===================
+
+If you're using Visual Studio, you can set up a virtualenv in that IDE.
 
 Create a Python virtualenv, activate it, and then run::
 
     pip install -r requirements.txt
+
+
+Using precompiled dependencies on Linux
+=======================================
 
 On Fedora/RHEL, you can run without a virtualenv and use system-site packages
 instead::

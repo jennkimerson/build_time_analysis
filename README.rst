@@ -21,6 +21,11 @@ Then install the dependencies into the virtualenv::
 Installing on macos
 ===================
 
+On macos, install the postgresql client and libpq packages from Homebrew::
+
+    brew install postgresql
+    brew install libpq
+
 If you're using Visual Studio, you can set up a virtualenv in that IDE.
 
 Create a Python virtualenv, activate it, and then run::

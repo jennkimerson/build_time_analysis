@@ -2,3 +2,5 @@ psycopg2
 matplotlib
 spicy
 pandas
+xlrd
+xlrd==1.2.0

@@ -6,9 +6,9 @@ conn = pp.connect(dbname='public', host='virtualdb.engineering.redhat.com', port
 cur = conn.cursor(cursor_factory=ppx.DictCursor)
 # Some builds do not have a start_time, so we will also query the
 # creation_time from the events table.
-postgreSQL_select_Query = """SELECT brew.build.*,brew.events.time 
-                                AS creation_time FROM brew.build 
-                                INNER JOIN brew.events ON brew.build.create_event=brew.events.id 
+postgreSQL_select_Query = """SELECT brew.build.*,brew.events.time
+                                AS creation_time FROM brew.build
+                                INNER JOIN brew.events ON brew.build.create_event=brew.events.id
                                 WHERE brew.build.pkg_id=34590 and brew.build.state = 1
                                 ORDER BY brew.events.id;"""
 
@@ -23,6 +23,25 @@ for row in current:
     print("pkg_id           = ", row['pkg_id'])
     print("version          = ", row['version'])
     print("release          = ", row['release'])
+
+    # print(row[0])
+    # print(row[1])
+    # print(row[2])
+    # print(row[3])
+    # print(row[4])
+    # print(row[5])
+    # print(row[6])
+    # print(row[7])
+    # print(row[8])
+    # print(row[9])
+    # print(row[10])
+    # print(row[11])
+    # print(row[12])
+    # print(row[13])
+    # print(row[14])
+    # print(row[15])
+    # print()
+
     
     # print("start_time  = ", row[11])
     # print("completion_time  = ", row[6], "\n")

@@ -1,13 +1,50 @@
 This tool analyzes ceph package build times in Brew.
 
-Installing
-==========
+Installing on Linux
+===================
+
+On RHEL/Fedora, when using a virtualenv, you must install the following
+packages::
+
+    sudo yum -y install python3-virtualenv libpq-devel krb5-devel
+
+Create a Python virtualenv and activate it::
+
+    virtualenv venv
+    . venv/bin/activate
+
+Then install the dependencies into the virtualenv::
+
+    pip install -r requirements.txt
+
+
+Installing on macos
+===================
+
+On macos, install the postgresql client and libpq packages from Homebrew::
+
+    brew install postgresql
+    brew install libpq
+
+If you're using Visual Studio, you can set up a virtualenv in that IDE.
 
 Create a Python virtualenv, activate it, and then run::
 
     pip install -r requirements.txt
 
 
+Using precompiled dependencies on Linux
+=======================================
+
+On Fedora/RHEL, you can run without a virtualenv and use system-site packages
+instead::
+
+    sudo yum -y install \
+      'python3dist(psycopg2)' \
+      'python3dist(numpy)' \
+      'python3dist(matplotlib)' \
+      'python3dist(pandas)'
+      
 Kerberos and PostgreSQL
 =======================
 
@@ -15,8 +52,20 @@ The Brew database is accessible through Teiid, a read-only virtual postgresql
 interface to the main Brew PostgreSQL server.
 
 You must have a Kerberos ticket to authenticate to the Teeid service running
-on virtualdb.engineering.redhat.com. To get a ticket, run the ``kinit``
-command like so::
+on virtualdb.engineering.redhat.com.
+
+To install ``kinit`` and ``klist`` on Fedora or RHEL, install the
+``krb5-workstation`` package::
+
+   sudo yum -y install krb5-workstation
+
+To make Kerberos easier to use on your system, you can set
+``default_realm = IPA.REDHAT.COM`` in ``/etc/krb5.conf``. Open it with an
+editor in sudo mode::
+
+   sudo vim /etc/krb5.conf
+
+To get a Kerberos ticket, run the ``kinit`` command like so::
 
     kinit jenkim@IPA.REDHAT.COM
 
@@ -36,8 +85,12 @@ The output will look like this::
 PostgreSQL queries for Brew
 ===========================
 
-To connect to Teeid on the command-line, ensure you have a Kerberos ticket,
-and then run the ``psql`` command::
+To connect to Teeid on the command-line, you'll need the ``psql`` command.
+Install it with yum::
+
+    sudo yum -y install postgresql
+
+Ensure you have a Kerberos ticket, and then run the ``psql`` command::
 
   psql -h virtualdb.engineering.redhat.com --port 5433 public
 
@@ -49,3 +102,38 @@ The "ceph" package entry in Brew has a package ID number of ``34590``. To query 
 record for the Ceph package::
 
     SELECT * FROM brew.build WHERE brew.build.pkg_id=34590;
+
+Running
+======
+
+Before running this program, you must set the PGHOST environment::
+
+    export PGHOST=virtualdb.engineering.redhat.com
+    
+There are 3 python scripts you can run to analyze the Ceph builds.
+
+- To output all builds, containing the following information: id, package_id, version, release, start_time, completion_time, and build_duration::
+
+    python3 view_stats.py
+
+- To show the analysis of build time per each build_id in a form of scatter plot::
+
+    python3 build_time_build_id.py
+
+- Show the analysis of build time per build_version in a form of box plot::
+
+    python3 build_time_ver.py
+
+
+Running tests
+=============
+
+Install pytest in the virtualenv::
+
+    pip install pytest
+
+Run the tests::
+
+    py.test
+
+This should auto-discover any tests under the ``tests`` directory.

@@ -1,10 +1,8 @@
 psycopg2
 matplotlib
-<<<<<<< HEAD
 spicy
 pandas
 xlrd
 xlrd==1.2.0
-=======
 pandas
->>>>>>> e7c065dfd5670dac8ad7d95ebf770f52671a1f18
+scikit-learn
